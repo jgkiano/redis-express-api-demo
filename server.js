@@ -1,3 +1,6 @@
+// envs
+// REDIS_HOST, REDIS_PORT, NODE_PORT || PORT, HOST
+
 const express = require("express");
 const { promisify } = require("util");
 const bodyParser = require("body-parser");
@@ -16,6 +19,7 @@ redisClient.on("error", function (error) {
 
 const app = express();
 const port = process.env.NODE_PORT || process.env.PORT || 3000;
+const host = process.env.HOST || "127.0.0.1";
 
 app.use(bodyParser.json());
 app.use(morgan("short"));
@@ -77,4 +81,4 @@ app.delete("/users", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log("server running on: " + port));
+app.listen(port, host, () => console.log("server running on: " + port));
