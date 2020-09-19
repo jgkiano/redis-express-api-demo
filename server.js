@@ -66,7 +66,7 @@ app.post("/users", (req, res) => {
   };
   redisClient.set("user:" + id, JSON.stringify(user), (err, reply) => {
     if (err) return res.status(500).send(err.message);
-    return res.send(reply);
+    return res.json(user);
   });
 });
 
